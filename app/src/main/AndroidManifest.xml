@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AAD">
         <activity
+            android:name=".ut02.LocalDataSource"
+            android:exported="true" />
+        <activity
             android:name=".ut02.SharedPreferencesActivity"
             android:exported="true" />
         <activity
