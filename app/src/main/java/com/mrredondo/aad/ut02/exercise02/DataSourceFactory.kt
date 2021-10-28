@@ -12,7 +12,7 @@ class DataSourceFactory<T : LocalModel> (
     fun create(idActionClicked: Int): LocalStorage<T> {
         return when (idActionClicked) {
             R.id.action_repository_file -> FileLocalStorage(activity, serializer)
-            R.id.action_repository_sharpref -> SharPrefLocalStorage(activity)
+            R.id.action_repository_sharpref -> SharPrefLocalStorage(activity, serializer)
             else -> MemLocalStorage()
         }
     }

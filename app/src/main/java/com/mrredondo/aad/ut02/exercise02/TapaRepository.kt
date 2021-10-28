@@ -5,8 +5,5 @@ class TapaRepository(private val localStorage: LocalStorage<TapaLocalModel>) {
         localStorage.save(tapa)
     }
 
-    fun fetch(id: String): TapaLocalModel? {
-        var tapa = localStorage.fetch(id)
-        return tapa
-    }
+    fun fetch(id: Int): TapaLocalModel? = localStorage.fetch(id.toString())
 }
