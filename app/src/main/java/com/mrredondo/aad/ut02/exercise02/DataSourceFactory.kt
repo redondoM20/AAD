@@ -9,11 +9,11 @@ class DataSourceFactory<T : LocalModel> (
     private val serializer: Serializer<T>
     ){
 
-    fun create(idActionClicked: Int): DataSource<T> {
+    fun create(idActionClicked: Int): LocalStorage<T> {
         return when (idActionClicked) {
-            R.id.action_repository_file -> FileDataSource(activity, serializer)
-            R.id.action_repository_sharpref -> SharPrefDataSource(activity)
-            else -> MemDataSource()
+            R.id.action_repository_file -> FileLocalStorage(activity, serializer)
+            R.id.action_repository_sharpref -> SharPrefLocalStorage(activity)
+            else -> MemLocalStorage()
         }
     }
 }

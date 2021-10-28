@@ -1,12 +1,12 @@
 package com.mrredondo.aad.ut02.exercise02
 
-class TapaRepository(private val dataSource: DataSource<TapaLocalModel>) {
+class TapaRepository(private val localStorage: LocalStorage<TapaLocalModel>) {
     fun save(tapa: TapaLocalModel) {
-        dataSource.save(tapa)
+        localStorage.save(tapa)
     }
 
-    fun fetch(id: Int): TapaLocalModel? {
-        var tapa = dataSource.fetch(id)
+    fun fetch(id: String): TapaLocalModel? {
+        var tapa = localStorage.fetch(id)
         return tapa
     }
 }
