@@ -7,4 +7,8 @@
     <string name="label_button_explorer">Listar Ficheros</string>
     <string name="label_button_show_content">Mostrar contenido</string>
     <string name="preference_encrypt_file_key">ut02_sharedpreference_encrypt</string>
+    <string name="action_file">Repositorio Fichero</string>
+    <string name="action_mem">Repositorio Memoria</string>
+    <string name="action_sharpref">Repositorio SharedPreferences</string>
+    <string name="preference_file_exercise02">ut02_exercise02</string>
 </resources>
