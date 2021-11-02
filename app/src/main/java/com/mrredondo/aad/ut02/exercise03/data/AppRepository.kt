@@ -7,6 +7,6 @@ class AppRepository(
         localStorage.save(app)
     }
 
-    fun fetch(id: Int): AppModel? = localStorage.fetch(id.toString())
+    fun fetch(): AppModel? = localStorage.fetch()
 
 }

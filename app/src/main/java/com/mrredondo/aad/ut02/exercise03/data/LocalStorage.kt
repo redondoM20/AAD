@@ -7,7 +7,7 @@ import java.io.File
 
 interface LocalStorage<T : LocalModel> {
     fun save(model: T)
-    fun fetch(id: String): T?
+    fun fetch(): T?
 }
 
 class FileLocalStorage<T : LocalModel>(
@@ -21,7 +21,7 @@ class FileLocalStorage<T : LocalModel>(
         file.writeText(serializer.toJson(model))
     }
 
-    override fun fetch(id: String): T? {
+    override fun fetch(): T? {
         if (file.exists()){
             return serializer.fromJson(file.readText())
         }

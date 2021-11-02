@@ -15,14 +15,15 @@ class Exercise03Activity : AppCompatActivity() {
 
     private val TAG = Exercise03Activity::class.java.simpleName
     private lateinit var appRatingBar: RatingBar
-    private val appRepository = AppRepository(FileLocalStorage<AppModel>(this, GsonSerializer<AppModel>()))
+    private lateinit var appRepository: AppRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise03)
+        appRepository = AppRepository(FileLocalStorage(this, GsonSerializer()))
         setupView()
         isFirstTime()
-        //setRatingValue()
+        setRatingValue()
     }
 
     private fun setupView() {
@@ -40,20 +41,40 @@ class Exercise03Activity : AppCompatActivity() {
     }
 
     private fun isFirstTime() {
-        val app = appRepository
-        Log.i(TAG, "$app")
+        val app = appRepository.fetch()
+        if(app == null || app.isFirstTime){
+            appRepository.save(AppModel(false))
+            Log.i(TAG, "Primera vez")
+        } else {
+            Log.i(TAG, "No primera vez")
+        }
     }
 
     private fun actionResetClicked() {
-
+        val app = appRepository.fetch()
+        if (app != null){
+            val resetStarts = 0f
+            appRepository.save(AppModel(app.isFirstTime, resetStarts))
+            appRatingBar.rating = resetStarts
+        }
     }
 
     private fun onChangeRating(newValue: Float) {
-        Log.d(TAG, "El usuario está cambiando el valor: ${newValue.toString()}")
+        Log.d(TAG, "El usuario está cambiando el valor: $newValue")
+        val app = appRepository.fetch()
+        if (app != null){
+            appRepository.save(AppModel(app.isFirstTime, newValue))
+        }else{
+            appRepository.save(AppModel(valorStarts = newValue))
+        }
     }
 
     private fun setRatingValue() {
-        val newValue: Float = 0f //Obtener valor de repositorio
+        val app = appRepository.fetch()
+        var newValue = 0f  //Obtener valor de repositorio
+        if (app != null){
+            newValue = app.valorStarts
+        }
         appRatingBar.rating = newValue
     }
 }

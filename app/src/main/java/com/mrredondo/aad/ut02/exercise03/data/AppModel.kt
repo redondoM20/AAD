@@ -1,10 +1,15 @@
 package com.mrredondo.aad.ut02.exercise03.data
 
 interface LocalModel{
-    fun getId(): Int
+    fun getId(): String
 }
 
-data class AppModel(val appId: Int = 1, val isFirstTime: Boolean = false) : LocalModel{
-    override fun getId(): Int = appId
-    fun getFirstTime(): Boolean = isFirstTime
+data class AppModel(val isFirstTime: Boolean = false, val valorStarts: Float = 0f) : LocalModel{
+    override fun getId(): String = ID
+    /**
+     * Método estático, se puede acceder desde fuera.
+     */
+    companion object {
+        val ID = AppModel::class.java.simpleName
+    }
 }
