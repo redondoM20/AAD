@@ -1,12 +1,12 @@
-package com.mrredondo.aad.ut03
+package com.mrredondo.aad.ut03.ex01
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.room.Room
 import com.mrredondo.aad.R
-import com.mrredondo.aad.ut03.data.AppDataBase
-import com.mrredondo.aad.ut03.data.UserEntity
+import com.mrredondo.aad.ut03.ex01.data.AppDataBase
+import com.mrredondo.aad.ut03.ex01.data.UserEntity
 
 class DataBaseActivity : AppCompatActivity() {
 
