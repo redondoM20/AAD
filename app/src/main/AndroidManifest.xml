@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AAD">
         <activity
-            android:name=".ut02.exercise03.Exercise03Activity"
+            android:name=".ut03.DataBaseActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +19,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ut02.exercise03.Exercise03Activity"
+            android:exported="true"/>
+        <activity
             android:name=".ut02.exercise02.Exercise02Activity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".ut02.SharedPreferencesActivity"
             android:exported="true" />
