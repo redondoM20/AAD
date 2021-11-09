@@ -4,11 +4,41 @@ import android.content.Context
 import com.mrredondo.aad.ut03.ex02.app.Ut03Ex02Database
 import com.mrredondo.aad.ut03.ex02.domain.PersonModel
 
-class PersonLocalSource (applicatioContext: Context) {
-    private val db = Ut03Ex02Database.getInstance(applicatioContext)
+class PersonLocalSource(applicationContext: Context) {
+    private val db = Ut03Ex02Database.getInstance(applicationContext)
 
-    fun  findAll(): List<PersonModel>{
+    init {
+        Thread{
+            db.clearAllTables()
+            Thread.sleep(2000)
+        }.start()
+    }
+
+    fun findAll(): List<PersonModel> {
         val people = db.personDao().findAll()
         return people.map { peopleEntity -> peopleEntity.toModel() }
     }
+
+    fun save(personalModel: PersonModel) {
+        db.personDao().insertPersonAndPet(
+            PersonEntity(
+                personalModel.id,
+                personalModel.name,
+                personalModel.age,
+            ), PetEntity(
+                personalModel.petModel.id,
+                personalModel.petModel.name,
+                personalModel.petModel.age,
+                personalModel.id
+            )
+        )
+
+        /*db.personDao().insert(
+            PersonEntity(
+                personalModel.id,
+                personalModel.name,
+                personalModel.age)
+        )*/
+    }
+
 }
