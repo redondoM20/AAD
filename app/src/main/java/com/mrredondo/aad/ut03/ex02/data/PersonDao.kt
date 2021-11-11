@@ -3,6 +3,7 @@ package com.mrredondo.aad.ut03.ex02.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 @Dao
 interface PersonDao {
@@ -10,9 +11,17 @@ interface PersonDao {
     fun findAll(): List<PersonEntity>
 
     @Insert
-    fun insert(personEntity: PersonEntity)
+    fun insert(personEntity: PersonEntity): Long
 
     @Insert
     fun insertPersonAndPet(personEntity: PersonEntity, petEntity: PetEntity)
+
+    @Transaction
+    @Query("SELECT * FROM person")
+    fun getPersonAndPets(): List<PersonAndPet>?
+
+    @Transaction
+    @Query("SELECT * FROM person")
+    fun getPersonAndPetAndCar(): List<PersonAndPetAndCar>?
 
 }

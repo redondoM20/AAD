@@ -14,9 +14,18 @@ class PersonLocalSource(applicationContext: Context) {
         }.start()
     }
 
-    fun findAll(): List<PersonModel> {
+    /*fun findAll(): List<PersonModel> {
         val people = db.personDao().findAll()
-        return people.map { peopleEntity -> peopleEntity.toModel() }
+        return mutableListOf()//people.map { peopleEntity -> peopleEntity.toModel }
+    }*/
+    /*fun findAll(): List<PersonModel>{
+        val peopleAndPet = db.personDao().getPersonAndPets()
+        return peopleAndPet?.map { element -> element.toModel() } ?: mutableListOf()
+    }*/
+
+    fun findAll(): List<PersonModel>{
+        val personAndPetAndCar = db.personDao().getPersonAndPetAndCar()
+        return personAndPetAndCar?.map { element -> element }
     }
 
     fun save(personalModel: PersonModel) {

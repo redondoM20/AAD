@@ -6,6 +6,7 @@ import android.util.Log
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut03.ex02.data.PersonDataRepository
 import com.mrredondo.aad.ut03.ex02.data.PersonLocalSource
+import com.mrredondo.aad.ut03.ex02.domain.CarModel
 import com.mrredondo.aad.ut03.ex02.domain.PersonModel
 import com.mrredondo.aad.ut03.ex02.domain.PersonRepository
 import com.mrredondo.aad.ut03.ex02.domain.PetModel
@@ -27,7 +28,19 @@ class Example02Activity : AppCompatActivity() {
 
     private fun executeQuery() {
         Thread {
-            repository.savePerson(PersonModel(1, "Name01", 1, "1", PetModel(1, "Petname", 1)))
+            repository.savePerson(
+                PersonModel(
+                    1,
+                    "Name01",
+                    1,
+                    "1",
+                    PetModel(1, "Petname1", 1),
+                    mutableListOf(
+                        CarModel(1, "Opel", "Zafira"),
+                        CarModel(2, "Ford", "Smax")
+                    )
+                )
+            )
             val people = repository.fetchAll()
             Log.d(TAG, "$people")
         }.start()
