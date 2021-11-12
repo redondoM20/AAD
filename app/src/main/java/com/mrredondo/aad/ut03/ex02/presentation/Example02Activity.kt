@@ -6,10 +6,7 @@ import android.util.Log
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut03.ex02.data.PersonDataRepository
 import com.mrredondo.aad.ut03.ex02.data.PersonLocalSource
-import com.mrredondo.aad.ut03.ex02.domain.CarModel
-import com.mrredondo.aad.ut03.ex02.domain.PersonModel
-import com.mrredondo.aad.ut03.ex02.domain.PersonRepository
-import com.mrredondo.aad.ut03.ex02.domain.PetModel
+import com.mrredondo.aad.ut03.ex02.domain.*
 
 class Example02Activity : AppCompatActivity() {
 
@@ -38,6 +35,10 @@ class Example02Activity : AppCompatActivity() {
                     mutableListOf(
                         CarModel(1, "Opel", "Zafira"),
                         CarModel(2, "Ford", "Smax")
+                    ),
+                    mutableListOf(
+                        JobModel(1, "Profesor"),
+                        JobModel(2, "Electricista")
                     )
                 )
             )

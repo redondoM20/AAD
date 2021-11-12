@@ -4,14 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mrredondo.aad.ut03.ex02.data.CarEntity
-import com.mrredondo.aad.ut03.ex02.data.PersonDao
-import com.mrredondo.aad.ut03.ex02.data.PersonEntity
-import com.mrredondo.aad.ut03.ex02.data.PetEntity
+import com.mrredondo.aad.ut03.ex02.data.*
 
-@Database(entities = [PersonEntity::class, PetEntity::class, CarEntity::class], version = 1)
+@Database(entities = [PersonEntity::class, PetEntity::class, CarEntity::class, JobEntity::class], version = 1)
 abstract class Ut03Ex02Database : RoomDatabase() {
     abstract fun personDao(): PersonDao
+    abstract fun petDao(): PetDao
+    abstract fun carDao(): CarDao
+    abstract fun jobDao(): JobDao
+    abstract fun personJobDao(): PersonJobDao
 
     companion object {
         @Volatile

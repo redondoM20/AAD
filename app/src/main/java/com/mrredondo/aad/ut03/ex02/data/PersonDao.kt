@@ -16,12 +16,22 @@ interface PersonDao {
     @Insert
     fun insertPersonAndPet(personEntity: PersonEntity, petEntity: PetEntity)
 
-    @Transaction
-    @Query("SELECT * FROM person")
-    fun getPersonAndPets(): List<PersonAndPet>?
+    @Insert
+    fun insertPersonAndPetAndCar(personEntity: PersonEntity, petEntity: PetEntity, carEntity: List<CarEntity>)
+
+    @Insert
+    fun insertPersonAndPetAndCarAndJob(personEntity: PersonEntity, petEntity: PetEntity, carEntity: List<CarEntity>, jobEntity: List<JobEntity>)
 
     @Transaction
     @Query("SELECT * FROM person")
-    fun getPersonAndPetAndCar(): List<PersonAndPetAndCar>?
+    fun getPersonAndPets(): List<PersonAndPet>
+
+    @Transaction
+    @Query("SELECT * FROM person")
+    fun getPersonAndPetAndCar(): List<PersonAndPetAndCar>
+
+    @Transaction
+    @Query("SELECT * FROM person")
+    fun getPersonAndPetAndCarAndJob(): List<PersonAndPetAndCarAndJob>
 
 }
