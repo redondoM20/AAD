@@ -103,7 +103,8 @@ data class PersonJobEntity(
     @ColumnInfo(name = "job_id") val jobId: Int
 ) {
     companion object {
-        fun toEntity(personId: Int, jobId: Int) = PersonJobEntity(personId, jobId)
+        fun toEntity(personId: Int, jobIds: List<Int>) =
+            jobIds.map { jobId -> PersonJobEntity(personId, jobId) }
     }
 }
 

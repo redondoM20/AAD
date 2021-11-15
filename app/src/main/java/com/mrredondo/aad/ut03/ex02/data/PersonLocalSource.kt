@@ -50,7 +50,7 @@ class PersonLocalSource(applicationContext: Context) {
             db.carDao().insert(CarEntity.toEntity(personModel.carModel, personId.toInt()))
             val jobIds = db.jobDao().insert(JobEntity.toEntity(personModel.jobModel))
             db.personJobDao()
-                .insert(jobIds.map { jobId -> PersonJobEntity.toEntity(personId.toInt(), jobId.toInt()) })
+                //.insert(jobIds.map { jobId -> PersonJobEntity.toEntity(personId.toInt(), jobId.toInt()) })
         }
     }
 

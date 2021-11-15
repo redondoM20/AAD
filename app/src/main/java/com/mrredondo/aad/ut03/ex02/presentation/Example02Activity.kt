@@ -3,6 +3,7 @@ package com.mrredondo.aad.ut03.ex02.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut03.ex02.data.PersonDataRepository
 import com.mrredondo.aad.ut03.ex02.data.PersonLocalSource
@@ -12,6 +13,8 @@ class Example02Activity : AppCompatActivity() {
 
     private val TAG = Example02Activity::class.java.simpleName
 
+    private val viewModel by viewModels<Ut03Ex01ViewModel>()
+
     private val repository: PersonRepository by lazy {
         PersonDataRepository(PersonLocalSource(applicationContext))
     }
@@ -20,7 +23,8 @@ class Example02Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_example02)
-        executeQuery()
+        //executeQuery()
+        Ut03Ex01Coroutines()
     }
 
     private fun executeQuery() {
@@ -45,6 +49,10 @@ class Example02Activity : AppCompatActivity() {
             val people = repository.fetchAll()
             Log.d(TAG, "$people")
         }.start()
+    }
+
+    private fun Ut03Ex01Coroutines(){
+        viewModel.getPersonsViewModelScope(applicationContext)
     }
 
 }
