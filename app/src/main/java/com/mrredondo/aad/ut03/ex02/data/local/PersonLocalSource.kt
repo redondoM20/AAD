@@ -1,9 +1,12 @@
-package com.mrredondo.aad.ut03.ex02.data
+package com.mrredondo.aad.ut03.ex02.data.local
 
 import android.content.Context
 import com.mrredondo.aad.ut03.ex02.app.Ut03Ex02Database
+import com.mrredondo.aad.ut03.ex02.data.CarEntity
+import com.mrredondo.aad.ut03.ex02.data.JobEntity
+import com.mrredondo.aad.ut03.ex02.data.PersonEntity
+import com.mrredondo.aad.ut03.ex02.data.PetEntity
 import com.mrredondo.aad.ut03.ex02.domain.PersonModel
-import kotlin.math.E
 
 class PersonLocalSource(applicationContext: Context) {
     private val db = Ut03Ex02Database.getInstance(applicationContext)

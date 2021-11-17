@@ -1,9 +1,10 @@
-package com.mrredondo.aad.ut03.ex02.data
+package com.mrredondo.aad.ut03.ex02.data.local.Dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import com.mrredondo.aad.ut03.ex02.data.*
 
 @Dao
 interface PersonDao {

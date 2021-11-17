@@ -1,5 +1,7 @@
 package com.mrredondo.aad.ut03.ex03.data.remote
 
+import com.mrredondo.aad.ut03.ex03.domain.AlertModel
+
 data class AlertApiModel(
     val alert_id: String,
     val title: String,
@@ -9,5 +11,14 @@ data class AlertApiModel(
     val body: String? = "",
     val source: String? = "",
 ) {
-    fun toDomainModel(): Alert
+    fun toDomainModel(): AlertModel = AlertModel(
+        alert_id,
+        title,
+        type.toInt(),
+        summary,
+        date,
+        body ?: "",
+        source ?: "",
+        emptyList()
+    )
 }

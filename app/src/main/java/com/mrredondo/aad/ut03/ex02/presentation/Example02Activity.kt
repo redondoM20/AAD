@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut03.ex02.data.PersonDataRepository
-import com.mrredondo.aad.ut03.ex02.data.PersonLocalSource
+import com.mrredondo.aad.ut03.ex02.data.local.PersonLocalSource
 import com.mrredondo.aad.ut03.ex02.domain.*
 
 class Example02Activity : AppCompatActivity() {

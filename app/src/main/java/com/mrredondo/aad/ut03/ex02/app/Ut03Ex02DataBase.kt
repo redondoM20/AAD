@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mrredondo.aad.ut03.ex02.data.*
+import com.mrredondo.aad.ut03.ex02.data.local.Dao.*
 
 @Database(entities = [PersonEntity::class, PetEntity::class, CarEntity::class, JobEntity::class, PersonJobEntity::class], version = 1)
 abstract class Ut03Ex02Database : RoomDatabase() {

@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrredondo.aad.ut03.ex02.data.PersonDataRepository
-import com.mrredondo.aad.ut03.ex02.data.PersonLocalSource
+import com.mrredondo.aad.ut03.ex02.data.local.PersonLocalSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
