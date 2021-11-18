@@ -6,19 +6,25 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut02.exercise03.Exercise03Activity
+import kotlin.concurrent.thread
 
 class Ut03Ex03Activity : AppCompatActivity() {
 
     private val TAG: String = Exercise03Activity::class.java.simpleName
-    private val viewModel: Ut03Ex03ViewModel by viewModels()
+
+    private val viewModel by viewModels<Ut03Ex03ViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ut03_ex03)
+        getAllAlerts()
     }
 
     private fun getAllAlerts(){
-        val alerts = viewModel.getAlerts()
+        Thread {
+            val alerts = viewModel.getAlerts()
+            Log.d(TAG, "$alerts")
+        }.start()
         //..Visualizar la información en un LOG.
         // ¿Te atreves con un RecyclerView?
     }

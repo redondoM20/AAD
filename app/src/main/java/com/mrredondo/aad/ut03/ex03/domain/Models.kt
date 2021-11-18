@@ -8,7 +8,7 @@ data class AlertModel(
     val datePublished: String,
     val body: String,
     val source: String,
-    val files: List<FileModel>
+    val files: MutableList<FileModel>
 )
 
 data class FileModel(val name: String, val url: String)
