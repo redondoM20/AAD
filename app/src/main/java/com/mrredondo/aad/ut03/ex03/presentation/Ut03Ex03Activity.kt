@@ -6,13 +6,14 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut02.exercise03.Exercise03Activity
+import com.mrredondo.aad.ut03.ex03.data.local.db.AlertDbLocalSource
 import kotlin.concurrent.thread
 
 class Ut03Ex03Activity : AppCompatActivity() {
 
-    private val TAG: String = Exercise03Activity::class.java.simpleName
-
-    private val viewModel by viewModels<Ut03Ex03ViewModel>()
+    private val viewModel: Ut03Ex03ViewModel by lazy {
+        AlertViewModelFactory.build(AlertDbLocalSource(applicationContext))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +24,14 @@ class Ut03Ex03Activity : AppCompatActivity() {
     private fun getAllAlerts(){
         Thread {
             val alerts = viewModel.getAlerts()
-            Log.d(TAG, "$alerts")
+            Log.d("@dev", "$alerts")
         }.start()
         //..Visualizar la información en un LOG.
         // ¿Te atreves con un RecyclerView?
     }
 
-    private fun getAlertById(){
-        val alertId = ""
+    private fun getAlertById(alertId:String){
+        val alertId = alertId
         val alerts = viewModel.findAlert(alertId)
         // ¿Te atreves con un RecyclerView?
     }

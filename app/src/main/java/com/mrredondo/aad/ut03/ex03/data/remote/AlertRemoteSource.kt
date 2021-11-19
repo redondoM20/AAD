@@ -1,6 +1,6 @@
 package com.mrredondo.aad.ut03.ex03.data.remote
 
-import com.mrredondo.aad.ut03.ex03.app.ApiClient
+import com.mrredondo.aad.ut03.ex03.app.api.ApiClient
 import com.mrredondo.aad.ut03.ex03.domain.AlertModel
 
 class AlertRemoteSource(private val apiClient: ApiClient) {

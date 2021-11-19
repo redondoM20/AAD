@@ -1,4 +1,4 @@
-package com.mrredondo.aad.ut03.ex03.app
+package com.mrredondo.aad.ut03.ex03.app.api
 
 import com.mrredondo.aad.ut03.ex03.data.remote.AlertApiModel
 import okhttp3.OkHttpClient
@@ -15,7 +15,7 @@ class RetrofitApiClient : ApiClient {
         apiEndPoint = buildApiService()
     }
 
-    private fun buildApiService(): ApiEndPoint{
+    private fun buildApiService(): ApiEndPoint {
         return build().create(ApiEndPoint::class.java)
     }
 

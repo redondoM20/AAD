@@ -2,7 +2,6 @@ package com.mrredondo.aad.ut02.exercise03.data
 
 import androidx.appcompat.app.AppCompatActivity
 import com.mrredondo.aad.commons.Serializer
-import com.mrredondo.aad.ut02.exercise03.Exercise03Activity
 import java.io.File
 
 interface LocalStorage<T : LocalModel> {

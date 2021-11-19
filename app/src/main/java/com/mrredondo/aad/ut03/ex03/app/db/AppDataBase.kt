@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mrredondo.aad.ut03.ex03.data.dao.AlertDao
-import com.mrredondo.aad.ut03.ex03.data.local.entities.AlertEntity
+import com.mrredondo.aad.ut03.ex03.data.local.db.AlertDao
+import com.mrredondo.aad.ut03.ex03.data.local.db.AlertEntity
+import com.mrredondo.aad.ut03.ex03.data.local.db.FileEntity
 
 @Database(
-    entities = [AlertEntity::class],
+    entities = [AlertEntity::class, FileEntity::class],
     version = 1,
     exportSchema = false
 )
