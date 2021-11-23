@@ -9,7 +9,7 @@ class AlertDbLocalSource (private val appContext: Context) : AlertLocalSource{
 
     private val db = Ut03Ex03Database.getInstance(appContext)
 
-    override fun finAll(): List<AlertModel> {
+    override suspend fun finAll(): List<AlertModel> {
         val dbAlerts = db.alertDao().findAll()
         return dbAlerts.map { alertEntity -> alertEntity.toModel() }
     }

@@ -2,8 +2,7 @@ package com.mrredondo.aad.commons
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mrredondo.aad.ut02.exercise02.TapaLocalModel
-import com.mrredondo.aad.ut02.exercise03.data.AppModel
+import com.mrredondo.aad.ut03.ex03.domain.AlertModel
 import java.lang.reflect.Type
 
 interface Serializer<T> {
@@ -19,7 +18,7 @@ interface Serializer<T> {
 class GsonSerializer<T> : Serializer<T> {
 
     private val gson = Gson()
-    private val types: Type = TypeToken.getParameterized(AppModel::class.java).type
+    private val types: Type = TypeToken.getParameterized(AlertModel::class.java).type
 
     override fun toJson(model: T): String =
         gson.toJson(model, types)
