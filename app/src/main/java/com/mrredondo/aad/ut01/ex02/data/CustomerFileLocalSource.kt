@@ -12,12 +12,24 @@ import java.io.File
  */
 class CustomerFileLocalSource(private val activity: AppCompatActivity, private val serializer: JsonSerializer) {
 
-    private val file = File(activity.filesDir, "add_customer.txt")
+    private fun getFile(fileName: String): File {
+        val file = File(activity.filesDir, fileName)
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+        return file
+    }
+
+    companion object {
+        const val CUSTOMER_FILENAME: String = "aad_customer.txt"
+        fun getAlertDetailFileName(customerId: Int): String = "aad_customer_$customerId.txt"
+    }
 
     /**
      * Función que me permite guardar un cliente en un fichero.
      */
     fun save(customer: CustomerModel) {
+        val file = getFile(getAlertDetailFileName(customer.id))
         file.writeText(serializer.toJson(customer, CustomerModel::class.java))
     }
 
@@ -25,6 +37,7 @@ class CustomerFileLocalSource(private val activity: AppCompatActivity, private v
      * Función que me permite guardar un listado de clientes en un fichero.
      */
     fun save(customers: List<CustomerModel>) {
+        val file = getFile(CUSTOMER_FILENAME)
         customers.map { customerModel ->
             file.appendText(serializer.toJson(customerModel, CustomerModel::class.java) + System.lineSeparator())
         }
@@ -49,6 +62,7 @@ class CustomerFileLocalSource(private val activity: AppCompatActivity, private v
      * Función que me permite obtener un listado de todos los clientes almacenados en un fichero.
      */
     fun fetch(): List<CustomerModel> {
+        val file = getFile(CUSTOMER_FILENAME)
         val customers: MutableList<CustomerModel> = mutableListOf()
         val lines = file.readLines()
         lines.map { line ->
@@ -59,6 +73,7 @@ class CustomerFileLocalSource(private val activity: AppCompatActivity, private v
     }
 
     fun findById(customerId: Int): CustomerModel? {
+        val file = getFile(getAlertDetailFileName(customerId))
         if (file.exists()){
             return serializer.fromJson(file.readText(), CustomerModel::class.java)
         }
