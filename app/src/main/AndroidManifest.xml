@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AAD">
         <activity
-            android:name=".ut01.ex02.Ut01Ex02Activity"
+            android:name=".ut01.ex02.presentation.Ut01Ex02Activity"
             android:exported="true" />
         <activity
             android:name=".ut02.exercise03.Exercise03Activity"

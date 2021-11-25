@@ -1,4 +1,6 @@
-package com.mrredondo.aad_playground.ut01.ex02
+package com.mrredondo.aad.ut01.ex02.data
+
+import com.mrredondo.aad_playground.ut01.ex02.InvoiceModel
 
 /**
  * Clase para persistir información en ficheros.
