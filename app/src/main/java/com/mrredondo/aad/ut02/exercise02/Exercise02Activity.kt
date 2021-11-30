@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.mrredondo.aad.R
-import com.mrredondo.aad.commons.GsonSerializer
+import com.mrredondo.aad.commons.serializer.GsonSerializer
 
 /**
  * Actividad que me permite ejecutar una fuente de datos en concreto según el botón pulsado.
@@ -13,7 +14,7 @@ import com.mrredondo.aad.commons.GsonSerializer
 class Exercise02Activity : AppCompatActivity() {
 
     private val TAG: String = Exercise02Activity::class.java.simpleName
-    private val factory = DataSourceFactory<TapaLocalModel>(this, GsonSerializer<TapaLocalModel>())
+    private val factory = DataSourceFactory<TapaLocalModel>(this, GsonSerializer(Gson()))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

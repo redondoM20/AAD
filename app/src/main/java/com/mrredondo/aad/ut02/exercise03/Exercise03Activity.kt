@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.RatingBar
+import com.google.gson.Gson
 import com.mrredondo.aad.R
-import com.mrredondo.aad.commons.GsonSerializer
+import com.mrredondo.aad.commons.serializer.GsonSerializer
 import com.mrredondo.aad.ut02.exercise03.data.AppModel
 import com.mrredondo.aad.ut02.exercise03.data.AppRepository
 import com.mrredondo.aad.ut02.exercise03.data.FileLocalStorage
@@ -20,7 +21,7 @@ class Exercise03Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise03)
-        appRepository = AppRepository(FileLocalStorage(this, GsonSerializer()))
+        appRepository = AppRepository(FileLocalStorage(this, GsonSerializer(Gson())))
         setupView()
         isFirstTime()
         setRatingValue()

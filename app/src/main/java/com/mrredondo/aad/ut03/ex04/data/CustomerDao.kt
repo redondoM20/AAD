@@ -1,4 +1,4 @@
-package com.mrredondo.aad.ut03.ex04.app
+package com.mrredondo.aad.ut03.ex04.data
 
 import androidx.room.*
 import com.mrredondo.aad.ut03.ex04.data.CustomerEntity
@@ -10,6 +10,7 @@ interface CustomerDao {
     @Query("SELECT * FROM customers")
     fun findAll(): List<CustomerEntity>
 
+    @Transaction
     @Query("SELECT * FROM customers WHERE id = :customerId")
     fun findById(customerId: Int): CustomerEntity
 

@@ -2,11 +2,11 @@ package com.mrredondo.aad.ut02.exercise02
 
 import androidx.appcompat.app.AppCompatActivity
 import com.mrredondo.aad.R
-import com.mrredondo.aad.commons.Serializer
+import com.mrredondo.aad.commons.serializer.JsonSerializer
 
 class DataSourceFactory<T : LocalModel> (
     private val activity: AppCompatActivity,
-    private val serializer: Serializer<T>
+    private val serializer: JsonSerializer
     ){
 
     fun create(idActionClicked: Int): LocalStorage<T> {
