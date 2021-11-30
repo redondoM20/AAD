@@ -1,7 +1,6 @@
 package com.mrredondo.aad.ut03.ex04.data
 
 import androidx.room.*
-import com.mrredondo.aad.ut03.ex04.data.CustomerEntity
 
 @Dao
 interface CustomerDao {

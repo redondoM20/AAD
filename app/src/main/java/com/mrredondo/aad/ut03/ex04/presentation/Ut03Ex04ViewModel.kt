@@ -1,5 +1,6 @@
 package com.mrredondo.aad.ut03.ex04.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,28 +17,15 @@ class Ut03Ex04ViewModel(
     private val deleteCustomerUseCase: DeleteCustomerUseCase,
     private val updateCustomerUseCase: UpdateCustomerUseCase
 ) : ViewModel() {
-    private val _customers: MutableLiveData<CustomersViewState> by lazy {
-        MutableLiveData<CustomersViewState>()
-    }
 
-    val customersObservable: LiveData<CustomersViewState>
-        get() = _customers
-
-    private val _customer: MutableLiveData<CustomerViewState> by lazy {
-        MutableLiveData<CustomerViewState>()
-    }
-
-    val customerObservable: LiveData<CustomerViewState>
-        get() = _customer
-
-    fun getCustomers() = viewModelScope.launch(Dispatchers.Main) {
+    fun getCustomers() = viewModelScope.launch(Dispatchers.IO) {
         val customers = getCustomersUseCase.execute()
-        _customers.value = CustomersViewState(customers)
+        Log.d("@dev", "$customers")
     }
 
-    fun getCustomer(customerId: Int) = viewModelScope.launch(Dispatchers.Main) {
+    fun getCustomer(customerId: Int) = viewModelScope.launch(Dispatchers.IO) {
         val customer = getCustomerUseCase.execute(customerId)
-        _customer.value = CustomerViewState(customer)
+        Log.d("@dev", "$customer")
     }
 
     fun saveCustomer(customerModel: CustomerModel) = viewModelScope.launch(Dispatchers.IO){
