@@ -33,7 +33,9 @@ class Ut03Ex04Activity : AppCompatActivity() {
         setContentView(R.layout.activity_ut03_ex04)
         saveCustomer()
         loadCustomers()
-        loadCustomer(2)
+        loadCustomer(3)
+        deleteCustomer()
+        updateCustomer()
     }
 
     private fun saveCustomer(){
@@ -48,6 +50,14 @@ class Ut03Ex04Activity : AppCompatActivity() {
 
     private fun loadCustomer(customerId: Int){
         viewModel.getCustomer(customerId)
+    }
+
+    private fun deleteCustomer(){
+        viewModel.deleteCustomer(CustomerModel(2, "name02", "surname02"))
+    }
+
+    private fun updateCustomer(){
+        viewModel.updateCustomer(CustomerModel(3, "name04", "surname05"))
     }
 
 }

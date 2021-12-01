@@ -32,11 +32,11 @@ class Ut03Ex04ViewModel(
         saveCustomerUseCase.execute(customerModel)
     }
 
-    fun deleteCustomer(customerModel: CustomerModel) = viewModelScope.launch(Dispatchers.Main){
+    fun deleteCustomer(customerModel: CustomerModel) = viewModelScope.launch(Dispatchers.IO){
         deleteCustomerUseCase.execute(customerModel)
     }
 
-    fun updateCustomer(customerModel: CustomerModel) = viewModelScope.launch(Dispatchers.Main){
+    fun updateCustomer(customerModel: CustomerModel) = viewModelScope.launch(Dispatchers.IO){
         updateCustomerUseCase.execute(customerModel)
     }
 
