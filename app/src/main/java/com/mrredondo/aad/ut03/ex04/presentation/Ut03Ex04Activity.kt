@@ -2,8 +2,6 @@ package com.mrredondo.aad.ut03.ex04.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.Observer
 import com.mrredondo.aad.R
 import com.mrredondo.aad.ut03.ex04.data.CustomerDataRepository
 import com.mrredondo.aad.ut03.ex04.data.CustomerDbLocalSource
@@ -12,7 +10,6 @@ import com.mrredondo.aad.ut03.ex04.domain.customer.*
 
 class Ut03Ex04Activity : AppCompatActivity() {
 
-    private val TAG = Ut03Ex04Activity::class.java.simpleName
 
     private val repository: CustomerDataRepository by lazy {
         CustomerDataRepository(CustomerDbLocalSource(applicationContext))
