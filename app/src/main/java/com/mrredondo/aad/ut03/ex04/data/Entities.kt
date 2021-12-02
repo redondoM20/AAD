@@ -59,7 +59,7 @@ data class InvoiceLineEntity(
     @PrimaryKey @ColumnInfo(name = "id") val invoiceLineId: Int,
     @ColumnInfo(name = "product_id") val productId: Int
 ) {
-    fun toModel()=InvoiceLinesModel(invoiceLineId, )
+    //fun toModel()=InvoiceLinesModel(invoiceLineId, )
 
 
     companion object{
@@ -77,10 +77,10 @@ data class InvoiceLineAndProduct(
 )
 
 
-@Entity(tableName = "invoice")
+/*@Entity(tableName = "invoice")
 data class InvoiceEntity(
     @PrimaryKey @ColumnInfo(name = "id") val invoiceId: Int,
-    @ColumnInfo(name = "date")val date: Date,
+    @ColumnInfo(name = "date") val date: Date,
 ) {
     fun toModel(
         customerEntity: CustomerEntity,
@@ -91,4 +91,4 @@ data class InvoiceEntity(
         customerEntity.toModel(),
         invoiceLineEntity.map { it.toModel() }
     )
-}
+}*/

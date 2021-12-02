@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.mrredondo.aad.ut03.ex04.data.*
 
 @Database(
-    entities = [CustomerEntity::class, ProductEntity::class, InvoiceLineEntity::class, InvoiceEntity::class],
+    entities = [CustomerEntity::class, ProductEntity::class, InvoiceLineEntity::class, /*InvoiceEntity::class*/],
     version = 1,
     exportSchema = false
 )
@@ -15,7 +15,7 @@ abstract class Ut03Ex03Database : RoomDatabase() {
 
     abstract fun customerDao(): CustomerDao
     abstract fun productDao(): ProductDao
-    abstract fun invoiceDao(): InvoiceDao
+    /*abstract fun invoiceDao(): InvoiceDao*/
 
     companion object {
         @Volatile
