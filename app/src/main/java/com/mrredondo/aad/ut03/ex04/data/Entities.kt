@@ -54,23 +54,17 @@ data class ProductEntity(
     }
 }
 
-@Entity(tableName = "invoiceLine")
+@Entity(tableName = "invoiceline")
 data class InvoiceLineEntity(
     @PrimaryKey @ColumnInfo(name = "id") val invoiceLineId: Int,
-    @ColumnInfo(name = "product_id") val productId: Int,
-    @ColumnInfo(name = "invoice_id") val invoiceId: Int,
+    @ColumnInfo(name = "product_id") val productId: Int
 ) {
-    fun toModel(productEntity: ProductEntity)=InvoiceLinesModel(
-        invoiceLineId,
-        productEntity.toModel()
-    )
+    fun toModel()=InvoiceLinesModel(invoiceLineId, )
 
-    companion object {
-        fun toEntity(invoiceLinesModel: InvoiceLinesModel, productId: Int, invoiceId: Int) = InvoiceLineEntity(
-            invoiceLinesModel.id,
-            productId,
-            invoiceId
-        )
+
+    companion object{
+        fun toEntity(invoiceLinesModel: InvoiceLinesModel, productId: Int) =
+            InvoiceLineEntity(invoiceLinesModel.id, productId)
     }
 }
 
@@ -82,40 +76,19 @@ data class InvoiceLineAndProduct(
     ) val productEntity: ProductEntity
 )
 
-@Entity(tableName = "Invoice")
+
+@Entity(tableName = "invoice")
 data class InvoiceEntity(
     @PrimaryKey @ColumnInfo(name = "id") val invoiceId: Int,
-    @ColumnInfo(name = "date") val date: Date,
-    @ColumnInfo(name = "customer_id") val customerId: Int,
+    @ColumnInfo(name = "date")val date: Date,
 ) {
-    fun toModel(customerEntity: CustomerEntity, productEntity: ProductEntity ,invoiceLineEntities: List<InvoiceLineEntity>)=InvoiceModel(
+    fun toModel(
+        customerEntity: CustomerEntity,
+        invoiceLineEntity: List<InvoiceLineEntity>
+    ) = InvoiceModel(
         invoiceId,
         date,
         customerEntity.toModel(),
-        invoiceLineEntities.map { invoiceLineEntity -> invoiceLineEntity.toModel(productEntity) }.toMutableList()
+        invoiceLineEntity.map { it.toModel() }
     )
-
-    companion object {
-        fun toEntity(customerId: Int, invoiceModel: InvoiceModel) = InvoiceEntity(
-            invoiceModel.id,
-            invoiceModel.date,
-            customerId
-        )
-    }
 }
-
-
-
-data class InvoiceAndCustomerAndInvoiceLine(
-    @Embedded val invoiceEntity: InvoiceEntity,
-
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "customer_id"
-    ) val customerEntity: CustomerEntity,
-
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "invoice_alert"
-    )val invoiceLineEntities: List<InvoiceLineEntity>
-)

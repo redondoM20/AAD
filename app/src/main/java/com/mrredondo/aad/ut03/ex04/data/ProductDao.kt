@@ -2,6 +2,7 @@ package com.mrredondo.aad.ut03.ex04.data
 
 import androidx.room.*
 
+@Dao
 interface ProductDao {
 
     @Transaction

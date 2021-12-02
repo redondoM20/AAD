@@ -3,6 +3,7 @@ package com.mrredondo.aad.ut03.ex04.data
 import android.content.Context
 import com.mrredondo.aad.ut03.ex04.app.Ut03Ex03Database
 import com.mrredondo.aad.ut03.ex04.domain.CustomerModel
+import com.mrredondo.aad.ut03.ex04.domain.InvoiceModel
 import com.mrredondo.aad.ut03.ex04.domain.ProductModel
 
 class CustomerDbLocalSource (private val appContext: Context){
@@ -37,7 +38,7 @@ class CustomerDbLocalSource (private val appContext: Context){
         db.customerDao().update(CustomerEntity.toEntity(customerModel))
     }
 
-    /*fun findAllProduct(): List<ProductModel>{
+    fun findAllProduct(): List<ProductModel>{
         val products = db.productDao().findAll()
         return products.map { productEntity -> productEntity.toModel() }
     }
@@ -57,6 +58,14 @@ class CustomerDbLocalSource (private val appContext: Context){
 
     fun updateProduct(productModel: ProductModel){
         db.productDao().update(ProductEntity.toEntity(productModel))
-    }*/
+    }
+
+    fun saveInvoice(invoiceModel: InvoiceModel){
+        db.invoiceDao().insertInvoiceAndCustomerAndInvoiceLine(
+            InvoiceEntity.toEntity(invoiceModel),
+            CustomerEntity.toEntity(invoiceModel.customerModel),
+            InvoiceLineEntity.toEntity( invoiceModel.invoiceLinesModel, )
+        )
+    }
 
 }

@@ -24,7 +24,7 @@ class CustomerDataRepository (private val customerDbLocalSource: CustomerDbLocal
         customerDbLocalSource.updateCustomer(customerModel)
     }
 
-    /*fun findAllProduct(): List<ProductModel>{
+    fun findAllProduct(): List<ProductModel>{
         return customerDbLocalSource.findAllProduct()
     }
 
@@ -42,5 +42,5 @@ class CustomerDataRepository (private val customerDbLocalSource: CustomerDbLocal
 
     fun updateProduct(productModel: ProductModel){
         customerDbLocalSource.updateProduct(productModel)
-    }*/
+    }
 }
