@@ -10,6 +10,6 @@ data class TapasViewState(
 )
 data class TapaViewState(
     val isLoading: Boolean,
-    val tapaModels: TapaModel?,
+    val tapaModel: TapaModel?,
     val failure: Throwable?
 )

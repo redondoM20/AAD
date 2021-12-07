@@ -1,12 +1,15 @@
-package com.mrredondo.aad.ut03.ex06.data.local
+package com.mrredondo.aad.ut03.ex06.data.local.files
 
 import android.content.Context
 import com.mrredondo.aad.commons.serializer.JsonSerializer
+import com.mrredondo.aad.ut03.ex06.data.local.LocalDataSource
+import com.mrredondo.aad.ut03.ex06.domain.BarModel
 import com.mrredondo.aad.ut03.ex06.domain.Failure
 import com.mrredondo.aad.ut03.ex06.domain.TapaModel
 import java.io.File
 
-class TapaFileLocalSource(private val context: Context, private val serializer: JsonSerializer): LocalDataSource{
+class TapaFileLocalSource(private val context: Context, private val serializer: JsonSerializer):
+    LocalDataSource {
 
     override fun findAll(): Result<List<TapaModel>> {
         val tapas: MutableList<TapaModel> = mutableListOf()
@@ -49,7 +52,7 @@ class TapaFileLocalSource(private val context: Context, private val serializer: 
 
     override fun findById(tapaId: String): Result<TapaModel> {
         val tapas = findAll()
-        var tapa: TapaModel
+        var tapa: TapaModel = TapaModel("", "", "", 0.0, "", BarModel("", "", ""))
         tapas.mapCatching {
             it.forEach {
                 if (it.id==tapaId){

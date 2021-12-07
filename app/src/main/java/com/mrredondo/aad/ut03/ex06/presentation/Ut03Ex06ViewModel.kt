@@ -1,20 +1,34 @@
 package com.mrredondo.aad.ut03.ex06.presentation
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mrredondo.aad.ut03.ex06.data.TapaDataRepository
 import com.mrredondo.aad.ut03.ex06.data.remote.MockDataSource
+import com.mrredondo.aad.ut03.ex06.domain.Failure
 import com.mrredondo.aad.ut03.ex06.domain.GetTapaUseCase
 import com.mrredondo.aad.ut03.ex06.domain.GetTapasUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class Ut03Ex06ViewModel : ViewModel() {
-    fun loadTapas(): TapasViewState {
-        val useCase = GetTapasUseCase(TapaDataRepository(MockDataSource()))
-        val result = useCase.execute()
-        return TapasViewState(false, result.getOrNull(), result.exceptionOrNull())
+class Ut03Ex06ViewModel(
+    private val getTapasUseCase: GetTapasUseCase,
+    private val getTapaUseCase: GetTapaUseCase
+) : ViewModel() {
+
+    fun getTapas() = viewModelScope.launch(Dispatchers.Main) {
+        val tapas = getTapasUseCase.execute()
+        tapas.mapCatching {
+            Log.d("@dev", "$it")
+        }
     }
-    fun loadTapa(tapaId: String): TapaViewState {
-        val useCase = GetTapaUseCase(TapaDataRepository(MockDataSource()))
-        val result = useCase.execute(tapaId)
-        return TapaViewState(false, result.getOrNull(), result.exceptionOrNull())
+
+    fun findTapaById(tapaId: String) = viewModelScope.launch(Dispatchers.Main) {
+        val tapa = getTapaUseCase.execute(tapaId)
+        tapa.mapCatching {
+            Log.d("@dev", "$it")
+        }
     }
 }

@@ -2,53 +2,37 @@ package com.mrredondo.aad.ut03.ex06.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.mrredondo.aad.R
+import com.google.gson.Gson
+import com.mrredondo.aad.commons.serializer.GsonSerializer
+import com.mrredondo.aad.databinding.ActivityUt03Ex06Binding
+import com.mrredondo.aad.ut03.ex06.data.local.files.TapaFileLocalSource
 
 class Ut03Ex06Activity : AppCompatActivity() {
 
-    private val TAG = Ut03Ex06Activity::class.java.simpleName
+    private val viewModel: Ut03Ex06ViewModel by lazy {
+        TapaViewFactory.build(TapaFileLocalSource(applicationContext, GsonSerializer(Gson())))
+    }
 
-    val viewModel = Ut03Ex06ViewModel()
+    private val bind: ActivityUt03Ex06Binding by lazy {
+        ActivityUt03Ex06Binding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ut03_ex06)
-        init()
+        setupBinding()
+        loadTapas()
+        loadTapa("2")
     }
 
-    private fun init(){
-        loadTapas()
-        loadTapa()
+    private fun setupBinding(){
+        setContentView(bind.root)
     }
 
     private fun loadTapas(){
-        Thread{
-            renderUiTapas(viewModel.loadTapas())
-        }.start()
+        viewModel.getTapas()
     }
 
-    private fun loadTapa(){
-        Thread{
-            renderUiTapa(viewModel.loadTapa("123"))
-        }
-    }
-
-    private fun renderUiTapas(tapasViewState: TapasViewState){
-        tapasViewState.tapaModels?.let {
-            Log.d(TAG, "Tapas: $it")
-        }
-        tapasViewState.failure?.let {
-            Log.d(TAG, "Error: $it")
-        }
-    }
-
-    private fun renderUiTapa(tapaViewState: TapaViewState){
-        tapaViewState.tapaModels?.let {
-            Log.d(TAG, "Tapas: $it")
-        }
-        tapaViewState.failure?.let {
-            Log.d(TAG, "Error: $it")
-        }
+    private fun loadTapa(tapaId: String){
+        viewModel.findTapaById(tapaId)
     }
 }

@@ -8,9 +8,11 @@ import com.mrredondo.aad.ut03.ex06.domain.TapaRepository
 class TapaDataRepository (val localDataSource: LocalDataSource, val remoteDataSource: RemoteDataSource) : TapaRepository{
     override fun fetchTapas(): Result<List<TapaModel>> {
         var tapas = localDataSource.findAll()
-        if (tapas.isFailure){
-            tapas = remoteDataSource.getTapas()
-            localDataSource.saveAll(tapas)
+        tapas.mapCatching {
+            if (it.isEmpty()){
+                    tapas = remoteDataSource.getTapas()
+                    localDataSource.saveAll(tapas)
+            }
         }
         return tapas
     }
