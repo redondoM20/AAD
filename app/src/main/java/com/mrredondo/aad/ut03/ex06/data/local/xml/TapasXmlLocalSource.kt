@@ -37,14 +37,10 @@ class TapasXmlLocalSource (private val context: Context, private val serializer:
     }
 
     override fun findById(tapaId: String): Result<TapaModel> {
-        val tapas = findAll()
+        val jsonModel = sharedPref.getString(tapaId, null)
         var tapa: TapaModel = TapaModel("", "", "", 0.0, "", BarModel("", "", ""))
-        tapas.mapCatching {
-            it.forEach {
-                if (it.id==tapaId){
-                    tapa = it
-                }
-            }
+        if (jsonModel != null){
+            tapa = serializer.fromJson(jsonModel, TapaModel::class.java)
         }
         return Result.success(tapa)
     }

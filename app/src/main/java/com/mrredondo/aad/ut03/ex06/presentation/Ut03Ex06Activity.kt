@@ -6,11 +6,16 @@ import com.google.gson.Gson
 import com.mrredondo.aad.commons.serializer.GsonSerializer
 import com.mrredondo.aad.databinding.ActivityUt03Ex06Binding
 import com.mrredondo.aad.ut03.ex06.data.local.files.TapaFileLocalSource
+import com.mrredondo.aad.ut03.ex06.data.local.xml.TapasXmlLocalSource
 
 class Ut03Ex06Activity : AppCompatActivity() {
 
-    private val viewModel: Ut03Ex06ViewModel by lazy {
+    /*private val viewModel: Ut03Ex06ViewModel by lazy {
         TapaViewFactory.build(TapaFileLocalSource(applicationContext, GsonSerializer(Gson())))
+    }*/
+
+    private val viewModel: Ut03Ex06ViewModel by lazy {
+        TapaViewFactory.build(TapasXmlLocalSource(applicationContext, GsonSerializer(Gson())))
     }
 
     private val bind: ActivityUt03Ex06Binding by lazy {
