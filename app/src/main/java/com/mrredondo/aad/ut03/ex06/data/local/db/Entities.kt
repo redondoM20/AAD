@@ -1,13 +1,11 @@
 package com.mrredondo.aad.ut03.ex06.data.local.db
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.mrredondo.aad.ut03.ex06.domain.BarModel
 import com.mrredondo.aad.ut03.ex06.domain.TapaModel
 
 
-@Entity(tableName = "tapa")
+@Entity(tableName = "tapas")
 data class TapaEntity(
     @PrimaryKey @ColumnInfo(name = "id") val tapaId: String,
     @ColumnInfo(name = "name") val name: String,
@@ -33,7 +31,7 @@ data class TapaEntity(
     }
 }
 
-@Entity(tableName = "bar")
+@Entity(tableName = "bares")
 data class BarEntity(
     @PrimaryKey @ColumnInfo(name = "id") val barId: String,
     @ColumnInfo(name = "name") val name: String,
@@ -47,3 +45,11 @@ data class BarEntity(
             BarEntity(barModel.id, barModel.name, barModel.address, tapaId)
     }
 }
+
+data class TapaAndBar(
+    @Embedded val tapaEntity: TapaEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "tapa_id"
+    ) val barEntity: BarEntity
+)
