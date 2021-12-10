@@ -14,15 +14,17 @@ class TapasXmlLocalSource (private val context: Context, private val serializer:
     override fun findAll(): Result<List<TapaModel>> {
         val tapas: MutableList<TapaModel> = mutableListOf()
         val jsonStrings = sharedPref.all.map { it.value }
-        jsonStrings.map { jsonString -> serializer.fromJson(jsonString as String, TapaModel::class.java) }
+        jsonStrings.map { jsonString ->
+            tapas.add(serializer.fromJson(jsonString as String, TapaModel::class.java))
+        }
         return Result.success(tapas.toList())
     }
 
     override fun saveAll(tapas: Result<List<TapaModel>>) {
         val edit = sharedPref.edit()
         tapas.mapCatching {
-            it.forEach {
-                edit?.putString(it.id, serializer.toJson(it, TapaModel::class.java))
+            it.forEach { tapaModel ->
+                edit?.putString(tapaModel.id, serializer.toJson(tapaModel, TapaModel::class.java))
                 edit?.apply()
             }
         }
@@ -37,11 +39,10 @@ class TapasXmlLocalSource (private val context: Context, private val serializer:
     }
 
     override fun findById(tapaId: String): Result<TapaModel> {
-        val jsonModel = sharedPref.getString(tapaId, null)
-        var tapa: TapaModel = TapaModel("", "", "", 0.0, "", BarModel("", "", ""))
-        if (jsonModel != null){
-            tapa = serializer.fromJson(jsonModel, TapaModel::class.java)
+        return findAll().mapCatching {
+            it.first{ element ->
+                element.id==tapaId
+            }
         }
-        return Result.success(tapa)
     }
 }

@@ -18,14 +18,14 @@ class Ut03Ex06ViewModel(
     private val getTapaUseCase: GetTapaUseCase
 ) : ViewModel() {
 
-    fun getTapas() = viewModelScope.launch(Dispatchers.Main) {
+    fun getTapas() = viewModelScope.launch(Dispatchers.IO) {
         val tapas = getTapasUseCase.execute()
         tapas.mapCatching {
             Log.d("@dev", "$it")
         }
     }
 
-    fun findTapaById(tapaId: String) = viewModelScope.launch(Dispatchers.Main) {
+    fun findTapaById(tapaId: String) = viewModelScope.launch(Dispatchers.IO) {
         val tapa = getTapaUseCase.execute(tapaId)
         tapa.mapCatching {
             Log.d("@dev", "$it")

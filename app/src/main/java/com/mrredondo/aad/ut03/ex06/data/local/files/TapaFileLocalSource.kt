@@ -51,16 +51,9 @@ class TapaFileLocalSource(private val context: Context, private val serializer: 
     }
 
     override fun findById(tapaId: String): Result<TapaModel> {
-        val tapas = findAll()
-        var tapa: TapaModel = TapaModel("", "", "", 0.0, "", BarModel("", "", ""))
-        tapas.mapCatching {
-            it.forEach {
-                if (it.id==tapaId){
-                    tapa = it
-                }
-            }
+        return findAll().mapCatching {
+            it.first { item -> item.id == tapaId }
         }
-        return Result.success(tapa)
     }
 
 
