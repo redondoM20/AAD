@@ -14,13 +14,11 @@ class TapaFileLocalSource(private val context: Context, private val serializer: 
     override fun findAll(): Result<List<TapaModel>> {
         val tapas: MutableList<TapaModel> = mutableListOf()
         val file = getFile()
-        if (file.isSuccess){
-            file.mapCatching {
-                val lines = it.readLines()
-                lines.map {
-                    val tapaModel = serializer.fromJson(it, TapaModel::class.java)
-                    tapas.add(tapaModel)
-                }
+        file.onSuccess {
+            val lines = it.readLines()
+            lines.map {
+                val tapaModel = serializer.fromJson(it, TapaModel::class.java)
+                tapas.add(tapaModel)
             }
         }
         return Result.success(tapas)
@@ -28,12 +26,10 @@ class TapaFileLocalSource(private val context: Context, private val serializer: 
 
     override fun saveAll(tapas: Result<List<TapaModel>>) {
         val file = getFile()
-        if (file.isSuccess&&tapas.isSuccess){
-            file.mapCatching { file ->
-                tapas.mapCatching {
-                    it.map {
-                        file.appendText(serializer.toJson(it, TapaModel::class.java) + System.lineSeparator())
-                    }
+        file.onSuccess { file ->
+            tapas.onSuccess {
+                it.map {
+                    file.appendText(serializer.toJson(it, TapaModel::class.java) + System.lineSeparator())
                 }
             }
         }
@@ -41,11 +37,9 @@ class TapaFileLocalSource(private val context: Context, private val serializer: 
 
     override fun save(tapa: Result<TapaModel>) {
         val file = getFile()
-        if (file.isSuccess&&tapa.isSuccess){
-            file.mapCatching { file ->
-                tapa.mapCatching { tapa ->
-                    file.appendText(serializer.toJson(tapa, TapaModel::class.java))
-                }
+        file.onSuccess { file ->
+            tapa.onSuccess {
+                file.appendText(serializer.toJson(it, TapaModel::class.java))
             }
         }
     }

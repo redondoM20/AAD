@@ -11,15 +11,13 @@ class TapaDbLocalSource(private val appContext: Context) : LocalDataSource {
 
     override fun findAll(): Result<List<TapaModel>> {
         val tapaAndBar = db.tapaDao().getTapaAndBar()
-        val tapasModel = mutableListOf<TapaModel>()
-        tapaAndBar.forEach {
-            tapasModel.add(it.tapaEntity.toModel(it.barEntity))
-        }
-        return Result.success(tapasModel)
+        return Result.success(tapaAndBar.map {
+            it.tapaEntity.toModel(it.barEntity)
+        })
     }
 
     override fun saveAll(tapas: Result<List<TapaModel>>) {
-        tapas.mapCatching {
+        tapas.onSuccess {
             it.forEach {
                 db.tapaDao().insertTapaAndBar(
                     TapaEntity.toEntity(it),
@@ -30,7 +28,7 @@ class TapaDbLocalSource(private val appContext: Context) : LocalDataSource {
     }
 
     override fun save(tapa: Result<TapaModel>) {
-        tapa.mapCatching {
+        tapa.onSuccess {
             db.tapaDao().insertTapaAndBar(
                 TapaEntity.toEntity(it),
                 BarEntity.toEntity(it.barModel, it.id)

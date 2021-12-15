@@ -15,13 +15,13 @@ class Ut03Ex06Activity : AppCompatActivity() {
         TapaViewFactory.build(TapaFileLocalSource(applicationContext, GsonSerializer(Gson())))
     }*/
 
-    private val viewModel: Ut03Ex06ViewModel by lazy {
-        TapaViewFactory.build(TapasXmlLocalSource(applicationContext, GsonSerializer(Gson())))
-    }
-
     /*private val viewModel: Ut03Ex06ViewModel by lazy {
-        TapaViewFactory.build(TapaDbLocalSource(applicationContext))
+        TapaViewFactory.build(TapasXmlLocalSource(applicationContext, GsonSerializer(Gson())))
     }*/
+
+    private val viewModel: Ut03Ex06ViewModel by lazy {
+        TapaViewFactory.build(TapaDbLocalSource(applicationContext))
+    }
 
     private val bind: ActivityUt03Ex06Binding by lazy {
         ActivityUt03Ex06Binding.inflate(layoutInflater)
