@@ -24,23 +24,19 @@ class TapaFileLocalSource(private val context: Context, private val serializer: 
         return Result.success(tapas)
     }
 
-    override fun saveAll(tapas: Result<List<TapaModel>>) {
+    override fun saveAll(tapas: List<TapaModel>) {
         val file = getFile()
         file.onSuccess { file ->
-            tapas.onSuccess {
-                it.map {
-                    file.appendText(serializer.toJson(it, TapaModel::class.java) + System.lineSeparator())
-                }
+            tapas.map {
+                file.appendText(serializer.toJson(it, TapaModel::class.java) + System.lineSeparator())
             }
         }
     }
 
-    override fun save(tapa: Result<TapaModel>) {
+    override fun save(tapa: TapaModel) {
         val file = getFile()
         file.onSuccess { file ->
-            tapa.onSuccess {
-                file.appendText(serializer.toJson(it, TapaModel::class.java))
-            }
+            file.appendText(serializer.toJson(tapa, TapaModel::class.java))
         }
     }
 

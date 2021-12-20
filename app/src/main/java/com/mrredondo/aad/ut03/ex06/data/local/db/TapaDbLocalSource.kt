@@ -16,24 +16,20 @@ class TapaDbLocalSource(private val appContext: Context) : LocalDataSource {
         })
     }
 
-    override fun saveAll(tapas: Result<List<TapaModel>>) {
-        tapas.onSuccess {
-            it.forEach {
-                db.tapaDao().insertTapaAndBar(
-                    TapaEntity.toEntity(it),
-                    BarEntity.toEntity(it.barModel, it.id)
-                )
-            }
-        }
-    }
-
-    override fun save(tapa: Result<TapaModel>) {
-        tapa.onSuccess {
+    override fun saveAll(tapas: List<TapaModel>) {
+        tapas.forEach {
             db.tapaDao().insertTapaAndBar(
                 TapaEntity.toEntity(it),
                 BarEntity.toEntity(it.barModel, it.id)
             )
         }
+    }
+
+    override fun save(tapa: TapaModel) {
+        db.tapaDao().insertTapaAndBar(
+            TapaEntity.toEntity(tapa),
+            BarEntity.toEntity(tapa.barModel, tapa.id)
+        )
     }
 
     override fun findById(tapaId: String): Result<TapaModel> {

@@ -20,22 +20,19 @@ class TapasXmlLocalSource (private val context: Context, private val serializer:
         return Result.success(tapas.toList())
     }
 
-    override fun saveAll(tapas: Result<List<TapaModel>>) {
+    override fun saveAll(tapas: List<TapaModel>) {
         val edit = sharedPref.edit()
-        tapas.mapCatching {
-            it.forEach { tapaModel ->
-                edit?.putString(tapaModel.id, serializer.toJson(tapaModel, TapaModel::class.java))
-                edit?.apply()
-            }
-        }
-    }
-
-    override fun save(tapa: Result<TapaModel>) {
-        val edit = sharedPref.edit()
-        tapa.mapCatching {
-            edit?.putString(it.id, serializer.toJson(it, TapaModel::class.java))
+        tapas.forEach { tapaModel ->
+            edit?.putString(tapaModel.id, serializer.toJson(tapaModel, TapaModel::class.java))
             edit?.apply()
         }
+
+    }
+
+    override fun save(tapa: TapaModel) {
+        val edit = sharedPref.edit()
+        edit?.putString(tapa.id, serializer.toJson(tapa, TapaModel::class.java))
+        edit?.apply()
     }
 
     override fun findById(tapaId: String): Result<TapaModel> {
